@@ -16,10 +16,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className="min-h-screen bg-gradient-to-b from-telegram-primary to-telegram-secondary">
-          {children}
-        </div>
+      <body className={`${inter.className} bg-tg-bg text-tg-text`}>
+        {children}
       </body>
     </html>
   )
