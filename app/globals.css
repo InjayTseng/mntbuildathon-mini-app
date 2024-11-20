@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 136, 204;
+  --background-end-rgb: 0, 153, 230;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+}
+
+@layer components {
+  .btn-telegram {
+    @apply px-4 py-2 bg-white text-telegram-primary font-semibold rounded-lg 
+           shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 
+           focus:ring-telegram-primary focus:ring-opacity-75 transition-all 
+           duration-300 ease-in-out transform hover:scale-105;
+  }
+
+  .card {
+    @apply bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-6 
+           shadow-lg border border-white border-opacity-20 
+           hover:bg-opacity-20 transition-all duration-300;
+  }
+}
