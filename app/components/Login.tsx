@@ -7,7 +7,7 @@ export function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const webApp = useTelegram();
+  const { showAlert } = useTelegram();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,10 +16,10 @@ export function Login() {
     try {
       // Simulate login delay
       await new Promise(resolve => setTimeout(resolve, 1000));
-      webApp?.showAlert('Login successful! 🎉');
+      showAlert('Login successful! 🎉');
       // Here you would typically handle the actual login logic
     } catch (error) {
-      webApp?.showAlert('Login failed. Please try again.');
+      showAlert('Login failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -48,14 +48,10 @@ export function Login() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="appearance-none relative block w-full px-3 py-2 border 
-                       border-gray-300 rounded-md bg-white bg-opacity-10 
-                       placeholder-gray-400 text-white focus:outline-none 
-                       focus:ring-2 focus:ring-telegram-primary focus:border-transparent"
+              className="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-tg-button focus:border-tg-button sm:text-sm"
               placeholder="Enter your email"
             />
           </div>
-
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-200 mb-2">
               Password
@@ -68,63 +64,29 @@ export function Login() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="appearance-none relative block w-full px-3 py-2 border 
-                       border-gray-300 rounded-md bg-white bg-opacity-10 
-                       placeholder-gray-400 text-white focus:outline-none 
-                       focus:ring-2 focus:ring-telegram-primary focus:border-transparent"
+              className="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-tg-button focus:border-tg-button sm:text-sm"
               placeholder="Enter your password"
             />
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <input
-              id="remember-me"
-              name="remember-me"
-              type="checkbox"
-              className="h-4 w-4 rounded border-gray-300 text-telegram-primary focus:ring-telegram-primary"
-            />
-            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-200">
-              Remember me
-            </label>
-          </div>
-
+        <div>
           <button
-            type="button"
-            className="text-sm text-telegram-primary hover:text-telegram-secondary"
+            type="submit"
+            disabled={isLoading}
+            className="btn-telegram w-full flex justify-center items-center"
           >
-            Forgot password?
-          </button>
-        </div>
-
-        <button
-          type="submit"
-          disabled={isLoading}
-          className={`btn-telegram w-full flex justify-center py-3 ${
-            isLoading ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-        >
-          {isLoading ? (
-            <span className="flex items-center">
-              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Signing in...
-            </span>
-          ) : (
-            'Sign in'
-          )}
-        </button>
-
-        <div className="text-center text-sm text-gray-200">
-          Don't have an account?{' '}
-          <button
-            type="button"
-            className="text-telegram-primary hover:text-telegram-secondary"
-          >
-            Sign up
+            {isLoading ? (
+              <span className="flex items-center">
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Signing in...
+              </span>
+            ) : (
+              'Sign in'
+            )}
           </button>
         </div>
       </form>

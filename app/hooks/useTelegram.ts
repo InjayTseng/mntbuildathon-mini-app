@@ -1,9 +1,26 @@
 'use client';
 
+interface TelegramWebApp {
+  backgroundColor: string;
+  textColor: string;
+  hint_color?: string;
+  link_color?: string;
+  button_color?: string;
+  button_text_color?: string;
+  secondary_bg_color?: string;
+  initDataUnsafe?: {
+    user?: any;
+    query_id?: string;
+  };
+  showAlert: (message: string) => void;
+  ready: () => void;
+  expand: () => void;
+}
+
 declare global {
   interface Window {
     Telegram?: {
-      WebApp?: any;
+      WebApp?: TelegramWebApp;
     };
   }
 }
@@ -32,6 +49,7 @@ export function useTelegram() {
       user: webApp.initDataUnsafe?.user,
       queryId: webApp.initDataUnsafe?.query_id,
       isInTelegram: true,
+      showAlert: (message: string) => webApp.showAlert(message),
     };
   }
 
@@ -40,5 +58,6 @@ export function useTelegram() {
     user: null,
     queryId: null,
     isInTelegram: false,
+    showAlert: (message: string) => alert(message),
   };
 }
