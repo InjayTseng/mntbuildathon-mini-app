@@ -163,6 +163,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-David Tseng - [@InjayTseng](https://github.com/InjayTseng)
+David Tseng - [@dtseng](https://t.me/dtseng)
 
 Project Link: [https://github.com/InjayTseng/mntbuildathon-mini-app](https://github.com/InjayTseng/mntbuildathon-mini-app)

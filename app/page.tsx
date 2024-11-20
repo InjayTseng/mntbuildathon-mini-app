@@ -16,7 +16,7 @@ export default function Home() {
   const { webApp, isInTelegram } = useTelegram();
 
   useEffect(() => {
-    // Only initialize if we're in Telegram
+    // Initialize Telegram WebApp if available
     if (webApp && isInTelegram) {
       webApp.ready();
       webApp.expand();
@@ -42,12 +42,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-tg-bg text-tg-text">
-      {!isInTelegram && (
-        <div className="fixed top-0 left-0 right-0 bg-yellow-500/90 text-black p-2 text-center text-sm">
-          ⚠️ This app works best inside Telegram
-        </div>
-      )}
-      <div className={`pb-20 ${!isInTelegram ? 'pt-10' : ''}`}>
+      <div className="pb-20">
         {renderContent()}
       </div>
       <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
