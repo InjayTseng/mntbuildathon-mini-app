@@ -40,5 +40,8 @@
     "viem": "^2.21.48",
     "wagmi": "^2.12.33",
     "web3": "^4.15.0"
+  },
+  "devDependencies": {
+    "pino-pretty": "^13.0.0"
   }
 }

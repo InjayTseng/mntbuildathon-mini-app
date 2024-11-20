@@ -5,6 +5,7 @@ import { WagmiProvider } from 'wagmi'
 import { arbitrum, mainnet } from '@reown/appkit/networks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
+import { useEffect } from 'react'
 
 // Setup queryClient
 const queryClient = new QueryClient()
@@ -31,7 +32,7 @@ const wagmiAdapter = new WagmiAdapter({
 })
 
 // Create modal
-createAppKit({
+const appKit = createAppKit({
   adapters: [wagmiAdapter],
   networks,
   projectId,
@@ -45,6 +46,11 @@ createAppKit({
 })
 
 export function AppKitProvider({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    // Initialize AppKit web components
+    appKit.init()
+  }, [])
+
   return (
     <WagmiProvider config={wagmiAdapter.wagmiConfig}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
