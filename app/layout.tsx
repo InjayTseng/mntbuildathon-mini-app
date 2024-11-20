@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { AppKitProvider } from './providers/AppKitProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'MNT Buildathon Mini App',
-  description: 'A playful Telegram mini app for MNT Buildathon',
+  description: 'A Telegram Mini App for Web3 gaming',
 }
 
 export default function RootLayout({
@@ -16,8 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-tg-bg text-tg-text`}>
-        {children}
+      <body className={inter.className}>
+        <AppKitProvider>
+          {children}
+        </AppKitProvider>
       </body>
     </html>
   )

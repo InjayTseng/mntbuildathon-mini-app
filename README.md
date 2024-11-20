@@ -1,33 +1,33 @@
-# MNT Buildathon Telegram Mini App
+# MNT Buildathon Mini App
 
-A modern, responsive Telegram Mini App built for the MNT Buildathon. This app features a game-centered interface with seamless Telegram integration, built using Next.js 14 and TypeScript.
+A Telegram Mini App for Web3 gaming, built with Next.js 14, TypeScript, and Tailwind CSS.
 
-![Telegram Mini App](https://telegram.org/img/t_logo.png)
+## Features
 
-## 🌟 Features
+- 🎮 Game-centered interface
+- 🔐 Web3 wallet integration with social login
+- 🎨 Responsive design with Telegram theme support
+- 🏪 NFT marketplace integration (Coming Soon)
+- 📱 Mobile-first design
 
-- **Responsive Design**: Mobile-first approach with adaptive layouts
-- **Telegram Integration**: Seamless WebApp SDK integration
-- **Modern UI Components**: Built with Shadcn UI and Tailwind CSS
-- **Theme Support**: Dynamic Telegram theme color adaptation
-- **Interactive Sections**:
-  - 🏪 Store: Browse and purchase items
-  - 🏆 Leaderboard: Track player rankings
-  - 🎮 Play: Discover and play games
-  - ⚔️ Quest: Complete challenges and missions
-  - 👤 Profile: View stats and achievements
+## Tech Stack
 
-## 🚀 Tech Stack
+- **Framework**: Next.js 14
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Shadcn UI
+- **Web3**: Reown AppKit, Wagmi, Viem
+- **NFT Marketplace**: Lootex SDK (Coming Soon)
 
-- **Framework**: [Next.js 14](https://nextjs.org/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: 
-  - [Tailwind CSS](https://tailwindcss.com/)
-  - [Shadcn UI](https://ui.shadcn.com/)
-- **Integration**: [Telegram Mini App SDK](https://core.telegram.org/bots/webapps)
-- **Deployment**: [Vercel](https://vercel.com)
+## Getting Started
 
-## 📦 Installation
+### Prerequisites
+
+- Node.js (v18.17.0 or higher)
+- npm (v10.9.0 or higher)
+- A Reown Cloud Project ID (get one at [cloud.reown.com](https://cloud.reown.com))
+
+### Installation
 
 1. Clone the repository:
    ```bash
@@ -42,126 +42,114 @@ A modern, responsive Telegram Mini App built for the MNT Buildathon. This app fe
 
 3. Create a `.env.local` file:
    ```env
-   NEXT_PUBLIC_BOT_USERNAME=your_bot_username
-   NEXT_PUBLIC_BASE_URL=your_base_url
+   NEXT_PUBLIC_REOWN_PROJECT_ID=your_reown_project_id
    ```
 
-4. Run the development server:
+4. Start the development server:
    ```bash
    npm run dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+## SDK Integrations
 
-## 🏗️ Project Structure
+### Reown AppKit Integration
+
+The app uses Reown AppKit for Web3 authentication and wallet management. It provides:
+
+- 🔑 Multi-method authentication:
+  - Web3 wallets (MetaMask, WalletConnect, etc.)
+  - Social logins (Google, X/Twitter, GitHub, Discord, Apple, Facebook, Farcaster)
+  - Email login
+
+#### Configuration
+
+The Reown AppKit is configured in `app/providers/AppKitProvider.tsx`:
+
+```typescript
+createAppKit({
+  adapters: [wagmiAdapter],
+  networks: [mainnet, arbitrum],
+  projectId: process.env.NEXT_PUBLIC_REOWN_PROJECT_ID,
+  metadata: {
+    name: 'MNT Buildathon Mini App',
+    description: 'A Telegram Mini App for Web3 gaming',
+    // ...
+  },
+  features: {
+    analytics: true,
+    email: true,
+    socials: ['google', 'x', 'github', 'discord', 'apple', 'facebook', 'farcaster'],
+    emailShowWallets: true,
+  }
+})
+```
+
+#### Usage
+
+The app provides a custom connect button component that can be used anywhere:
+
+```typescript
+import ConnectButton from '@/components/ui/connect-button'
+
+export function YourComponent() {
+  return <ConnectButton />
+}
+```
+
+### Lootex SDK Integration (Coming Soon)
+
+The app will integrate with Lootex SDK for NFT marketplace functionality:
+
+- 🖼️ NFT display and management
+- 💰 NFT trading capabilities
+- 🏷️ Price discovery and market data
+- 📊 Trading history and analytics
+
+#### Planned Features
+
+- NFT Gallery
+- Buy/Sell functionality
+- Price tracking
+- Transaction history
+- Collection management
+
+Stay tuned for updates on the Lootex SDK integration!
+
+## Project Structure
 
 ```
 mntbuildathon-mini-app/
 ├── app/
 │   ├── components/
-│   │   ├── sections/
-│   │   │   ├── Store.tsx
-│   │   │   ├── Leaderboard.tsx
-│   │   │   ├── Play.tsx
-│   │   │   ├── Quest.tsx
-│   │   │   └── Profile.tsx
-│   │   └── ui/
-│   │       ├── button.tsx
-│   │       └── card.tsx
-│   ├── hooks/
-│   │   └── useTelegram.ts
-│   ├── layout.tsx
-│   └── page.tsx
-├── lib/
-│   └── utils.ts
-├── public/
-├── styles/
-└── types/
+│   │   ├── sections/      # Page sections
+│   │   └── ui/           # Reusable UI components
+│   ├── hooks/            # Custom React hooks
+│   ├── providers/        # Context providers
+│   └── layout.tsx        # Root layout
+├── public/              # Static assets
+└── styles/             # Global styles
 ```
 
-## 🎨 Features & Components
-
-### Telegram Integration
-- Automatic theme color adaptation
-- Native alert dialogs
-- WebApp expansion support
-- User data access
-
-### UI Components
-- Custom Button component with Telegram styling
-- Responsive Card layouts
-- Interactive Navigation bar
-- Loading states and animations
-
-### Sections
-1. **Store**
-   - Item browsing
-   - Purchase functionality
-   - Price display
-
-2. **Leaderboard**
-   - Player rankings
-   - Score tracking
-   - Achievement display
-
-3. **Play**
-   - Game discovery
-   - Quick start options
-   - Game stats
-
-4. **Quest**
-   - Challenge tracking
-   - Progress indicators
-   - Reward system
-
-5. **Profile**
-   - User statistics
-   - Achievement badges
-   - Game history
-
-## 🔧 Development
-
-### Commands
-
-- `npm run dev`: Start development server
-- `npm run build`: Build production version
-- `npm start`: Start production server
-- `npm run lint`: Run ESLint
-
-### Environment Variables
-
-Required environment variables:
-
-```env
-NEXT_PUBLIC_BOT_USERNAME=
-NEXT_PUBLIC_BASE_URL=
-```
-
-## 📱 Deployment
-
-The app is deployed on Vercel and can be accessed at:
-[https://mntbuildathon-mini-app.vercel.app](https://mntbuildathon-mini-app.vercel.app)
-
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
-2. Create your feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👏 Acknowledgments
+## Acknowledgments
 
 - [Telegram Mini Apps Documentation](https://core.telegram.org/bots/webapps)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Tailwind CSS](https://tailwindcss.com/docs)
 - [Shadcn UI](https://ui.shadcn.com/docs)
 
-## 📞 Contact
+## Contact
 
 David Tseng - [@dtseng](https://t.me/dtseng)
 
